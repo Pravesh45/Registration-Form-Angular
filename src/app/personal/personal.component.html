@@ -1,0 +1,111 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" id="tab1">Personal Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" id="tab2">Academic Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" id="tab3">Work Experience</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" id="tab4">Upload Picture</a>
+    </li>
+</ul>
+
+<form class="row g-3" id="form" #userForm="ngForm" novalidate>
+    <div class="col-md-6">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" #firstname="ngModel" class="form-control" [class.is-invalid]="firstname.invalid && firstname.touched" name="firstName" [(ngModel)]="personalData.firstName" required>
+      <small style="color: red;" [class.d-none]="firstname.valid || firstname.untouched">First Name is required</small>
+    </div>
+    <div class="col-md-6">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" #lastName="ngModel" class="form-control" [class.is-invalid]="lastName.invalid && lastName.touched" name="lastName" [(ngModel)]="personalData.lastName" required>
+      <small style="color: red;" [class.d-none]="lastName.valid || lastName.untouched">Last Name is required</small>
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" #email="ngModel" [class.is-invalid]="email.invalid && email.touched" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$" class="form-control" name="email" placeholder="example@domain.com" [(ngModel)]="personalData.email" required>
+      <div *ngIf="email.errors && email.touched">
+        <small style="color: red;" *ngIf="email.errors.required">Email is required</small>
+        <small style="color: red;" *ngIf="email.errors.pattern">Email is Invalid</small>
+      </div>
+    </div>
+    <div class="col-md-2">
+        <label for="country" class="form-label">Country</label>
+        <select name="country" #country="ngModel" [class.is-invalid]="country.invalid && country.touched" class="form-select" [(ngModel)]="personalData.country" required>
+            <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+        </select>
+        <small style="color: red;" [class.d-none]="country.valid || country.untouched">Country is required</small>
+      </div>
+      <div class="col-md-1">
+          <label for="code" class="form-label">Code</label>
+          <select name="code" #code="ngModel" [class.is-invalid]="code.invalid && code.touched" class="form-select" [(ngModel)]="personalData.code">
+              <ng-container *ngIf="personalData.country==='India'; else other">
+                <option value="+91">+91</option>
+              </ng-container>
+              <ng-template #other>
+                <option *ngFor="let code of dailCode" value="{{code}}">{{code}}</option>
+              </ng-template>
+          </select>
+      </div>
+      <div class="col-md-3">
+          <label for="mob" class="form-label">Mob No.</label>
+          <input type="number" #mob="ngModel" [class.is-invalid]="mob.invalid && mob.touched" pattern="^\d{10}$" name="mob" class="form-control" [(ngModel)]="personalData.mob" required>
+          <div *ngIf="mob.errors && mob.touched">
+            <small style="color: red;" *ngIf="mob.errors.required">Mobile no. is required</small>
+            <small style="color: red;" *ngIf="mob.errors.pattern">Mobile no. must be atleast 10 digits</small>
+          </div>
+      </div>
+    <div class="col-12">
+      <label for="address1" class="form-label">Address 1</label>
+      <input type="text" #addr="ngModel" [class.is-invalid]="addr.invalid && addr.touched" class="form-control" name="address1" placeholder="Apartment No, Floor, Street" [(ngModel)]="personalData.address1" required>
+      <small style="color: red;" [class.d-none]="addr.valid || addr.untouched">Address is required</small>
+    </div>
+    <div class="col-8">
+      <label for="address2" class="form-label">Address 2</label>
+      <input type="text" class="form-control" name="address2" placeholder="Area,Village" [(ngModel)]="personalData.address2">
+    </div>
+    <div class="col-4">
+      <label for="landmark" class="form-label">Landmark</label>
+      <input type="text" class="form-control" name="landmark" [(ngModel)]="personalData.landmark">
+    </div>
+    <div class="col-md-4">
+      <label for="state" class="form-label">State</label>
+      <select name="state" #state="ngModel" [class.is-invalid]="state.invalid && state.touched" class="form-select" [(ngModel)]="personalData.state" [disabled]="personalData.country===''" required>
+          <ng-container *ngIf="personalData.country==='India'">
+            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+          </ng-container>
+      </select>
+      <small style="color: red;" [class.d-none]="state.valid || state.untouched">State is required</small>
+    </div>
+    <div class="col-md-3">
+      <label for="district" class="form-label">District</label>
+      <select name="district" #district="ngModel" [class.is-invalid]="district.invalid && district.touched" class="form-select" [(ngModel)]="personalData.district" [disabled]="personalData.state===''" required>
+        <ng-container *ngIf="personalData.state==='Karnataka'">
+          <option *ngFor="let district of districts" value="{{district}}">{{district}}</option>
+        </ng-container>
+      </select>
+      <small style="color: red;" [class.d-none]="district.valid || district.untouched">District is required</small>
+    </div>
+    <div class="col-md-3">
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" name="city" [(ngModel)]="personalData.city">
+      </div>
+    <div class="col-md-2">
+      <label for="zipCode" class="form-label">Zip</label>
+      <input type="text" #zip="ngModel" (blur)="validateZip(zip.value)" (ngModelChange)="validateZip(zip.value)" [class.is-invalid]="zip.touched && hasError" class="form-control" name="zipCode" [(ngModel)]="personalData.zipCode" required>
+      <div *ngIf="hasError && zip.touched">
+        <ng-container *ngIf="zipLength===0; else next">
+          <small style="color: red;">Zipcode is required</small>
+        </ng-container>
+        <ng-template #next> 
+          <small style="color: red;" *ngIf="personalData.country==='India'">Zipcode should be 6 digits</small>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-12" id="submit">
+      <button type="submit" class="btn btn-primary" (click)="onClick()" routerLink="/academicData" [disabled]="userForm.form.invalid || hasError">Save & Continue</button>
+    </div>
+  </form>

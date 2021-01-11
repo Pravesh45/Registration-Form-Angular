@@ -1,0 +1,26 @@
+.tab-pane {
+    padding:20px;
+}
+
+label{
+    text-align: left;
+}
+
+#form{
+    margin-left:5px;
+    margin-right:5px;
+    margin-top:5px;
+}
+
+#tab2{
+    color:green;
+}
+
+#job{
+    margin-top:30px;
+}
+
+#submit{
+    margin-top:30px;
+    margin-bottom:30px;
+}

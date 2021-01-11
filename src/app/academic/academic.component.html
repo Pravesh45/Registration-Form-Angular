@@ -1,0 +1,110 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" id="tab1"  routerLink="/personalData">Personal Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" id="tab2">Academic Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" id="tab3">Work Experience</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" id="tab4">Upload Picture</a>
+    </li>
+</ul>
+
+<form class="row g-3" id="form" #userForm="ngForm">
+    <div class="col-md-6">
+      <label for="degree" class="form-label">Degree</label>
+      <input type="text" #degree="ngModel" class="form-control" name="degree" [class.is-invalid]="degree.touched && degree.invalid" [(ngModel)]="academicData.degree" required>
+      <small style="color: red;" [class.d-none]="degree.valid || degree.untouched">Degree is required</small>
+    </div>
+    <div class="col-md-6">
+      <label for="spec" class="form-label">Specilization</label>
+      <input type="text" #spec="ngModel" class="form-control" [class.is-invalid]="spec.touched && spec.invalid" name="spec" [(ngModel)]="academicData.specilization" required>
+      <small style="color: red;" [class.d-none]="spec.valid || spec.untouched">Specilization is required</small>
+    </div>
+    <div class="col-md-6">
+      <label for="institute" class="form-label">University/Institute</label>
+      <input type="text" #institute="ngModel" [class.is-invalid]="institute.touched && institute.invalid" class="form-control" name="institute" [(ngModel)]="academicData.university" required>
+      <small style="color: red;" [class.d-none]="institute.valid || institute.untouched">University is required</small>
+    </div>
+    <div class="col-md-3">
+        <label for="yos" class="form-label">Year Of Study</label>
+        <select name="yos" #yos="ngModel" class="form-select" [class.is-invalid]="yos.touched && yos.invalid" [(ngModel)]="academicData.yos" required>
+            <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+        </select>
+        <small style="color: red;" [class.d-none]="yos.valid || yos.untouched">Year of study is required</small>
+      </div>
+      <div class="col-md-3">
+          <label for="marks" class="form-label">CGPA</label>
+          <input type="number" #cgpa="ngModel" [class.is-invalid]="cgpa.touched && hasError" (blur)="validateCGPA(cgpa.value)" (ngModelChange)="validateCGPA(cgpa.value)" name="marks" class="form-control" [(ngModel)]="academicData.cgpa" required>
+          <div *ngIf="hasError && cgpa.touched">
+            <ng-container *ngIf="hasError===1; else second">
+              <small style="color: red;" >CGPA is required</small>
+            </ng-container>
+            <ng-template #second>
+              <small style="color: red;">CGPA is should be less than 10</small>
+            </ng-template>
+          </div>
+      </div>
+      <div class="col-md-12">
+        <label for="interest" class="form-label">Interests</label>
+        <select name="interest" #interest="ngModel" class="form-select" [class.is-invalid]="interest.touched && interest.invalid" multiple aria-label="multiple select example" [(ngModel)]="academicData.interest">
+          <option value="Database Management">Database Management</option>
+          <option value="Operating System">Operating System</option>
+          <option value="Networking">Networking</option>
+          <option value="Cryptography">Cryptography</option>
+        </select>
+      </div>
+    <div class="col-md-3">
+      Have you taken break in studies:
+    </div>
+    <div class="col-md-9">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" #brk="ngModel" type="radio" name="break" value="Yes" [(ngModel)]="academicData.brk" required>
+        <label class="form-check-label" for="optionYesBreak">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" #brk="ngModel" type="radio" name="break" value="No" checked [(ngModel)]="academicData.brk" required>
+        <label class="form-check-label" for="optionNoBreak">No</label>
+      </div>
+    </div>
+    <div class="col-md-3">
+      Do you have pending backlogs:
+    </div>
+    <div class="col-md-9">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" #backlog="ngModel" type="radio" name="backlog" value="Yes" [(ngModel)]="academicData.backlog" required>
+        <label class="form-check-label" for="optionYesBack">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" #backlog="ngModel" type="radio" name="backlog" value="No" checked [(ngModel)]="academicData.backlog" required>
+        <label class="form-check-label" for="optionNoBack">No</label>
+      </div>
+    </div>
+    <div class="col-md-3">
+      Rewards/Scholarships:
+    </div>
+    <div class="col-md-9">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" #sco="ngModel" name="scolarship" value="Yes" [(ngModel)]="academicData.scolarship" required>
+        <label class="form-check-label" for="optionYesSco">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" #sco="ngModel" name="scolarship" value="No" [(ngModel)]="academicData.scolarship" required>
+        <label class="form-check-label" for="optionNoBack">No</label>
+      </div>
+    </div>
+    <div class="col-md-12" id="job">
+      <div class="form-check">
+        <label class="form-check-label" for="job">
+          Send me promotional emails & job offers 
+        </label>
+        <input class="form-check-input" type="checkbox" #job="ngModel" name="job" [(ngModel)]="academicData.offer" required>
+      </div>
+    </div>
+    <div class="col-12" name="submit" id="submit">
+      <button type="submit" class="btn btn-primary" (click)="onClick()" routerLink="/workData" [disabled]="userForm.form.invalid || hasError">Save & Continue</button>
+    </div>
+  </form>

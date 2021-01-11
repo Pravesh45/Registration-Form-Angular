@@ -1,0 +1,39 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" id="tab1" routerLink="/personalData">Personal Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="tab2" routerLink="/academicData">Academic Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="tab3" routerLink="/workData">Work Experience</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" id="tab4">Upload Picture</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" id="tab5">Confirmation</a>
+    </li>
+</ul>
+
+<form class="row g-3" id="form">
+    <div class="col-md-12">
+      <div class="input-group mb-3" id="photo">
+        <input type="file" class="form-control" id="profilePic" (change)="selectFile($event)">
+        <label class="input-group-text" for="profilePic">Upload</label>
+      </div>
+    </div>
+    <ng-container *ngIf="url;else second">
+      <div class="col-md-12" id="picDiv">
+        <img [src]="url" id="profile">
+      </div>
+    </ng-container>
+    <ng-template #second>
+      <div class="col-md-12" id="msg">
+        <h2>{{msg}}</h2>
+      </div>
+    </ng-template>
+    <div class="col-md-12" id="button">
+      <button type="submit" class="btn btn-primary" routerLink="/confirm" id="submit" (click)="onClick()" [disabled]="disableButton">Save & Continue</button>
+    </div>
+</form>

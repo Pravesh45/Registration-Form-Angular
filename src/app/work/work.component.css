@@ -1,0 +1,23 @@
+.tab-pane {
+    padding:20px;
+}
+
+label{
+    text-align: left;
+}
+
+#form{
+    margin-left:5px;
+    margin-right:5px;
+    margin-top:5px;
+}
+
+#tab3{
+    color:green;
+}
+
+#submit{
+    margin-bottom:30px;
+    margin-top:30px;
+}
+

@@ -1,0 +1,197 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" id="tab1" routerLink="/personalData">Personal Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="tab2" routerLink="/academicData">Academic Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="tab3" routerLink="/workData">Work Experience</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="tab4" routerLink="/upload">Upload Picture</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" id="tab5">Confirmation</a>
+    </li>
+</ul>
+
+<div class="container">
+    <h4 id="section1">Personal Details</h4>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Response</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">First Name</th>
+                <th>{{personalData.firstName}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Last Name</th>
+                <th>{{personalData.lastName}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <th>{{personalData.email}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Country</th>
+                <th>{{personalData.country}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Country Code</th>
+                <th>{{personalData.code}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Mobile No.</th>
+                <th>{{personalData.mob}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Address 1</th>
+                <th>{{personalData.address1}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Address 2</th>
+                <th>{{personalData.address2}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Landmark</th>
+                <th>{{personalData.landmark}}</th>
+            </tr>
+            <tr>
+                <th scope="row">State</th>
+                <th>{{personalData.state}}</th>
+            </tr>
+            <tr>
+                <th scope="row">District</th>
+                <th>{{personalData.district}}</th>
+            </tr>
+            <tr>
+                <th scope="row">City</th>
+                <th>{{personalData.city}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Zip Code</th>
+                <th>{{personalData.zipCode}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Image</th>
+                <th id="im"><img id="propic" [src]="uploadData.url"></th>
+            </tr>
+        </tbody>
+    </table>
+    <h4 id="section2">Academic Details</h4>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Response</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Degree</th>
+                <th>{{academicData.degree}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Specilization</th>
+                <th>{{academicData.specilization}}</th>
+            </tr>
+            <tr>
+                <th scope="row">University</th>
+                <th>{{academicData.university}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Year Of Study</th>
+                <th>{{academicData.yos}}</th>
+            </tr>
+            <tr>
+                <th scope="row">CGPA</th>
+                <th>{{academicData.cgpa}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Interests</th>
+                <th>{{academicData.interest}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Have you taken break in studies:</th>
+                <th>{{academicData.brk}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Do you have pending backlogs:</th>
+                <th>{{academicData.backlog}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Rewards/Scholarships:</th>
+                <th>{{academicData.scolarship}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Send me promotional emails & job offers</th>
+                <th>{{academicData.offer}}</th>
+            </tr>
+        </tbody>
+    </table>
+    <h4 id="section3">Work Experience</h4>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Response</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Employer</th>
+                <th>{{workData.employer}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Years Of Experience</th>
+                <th>{{workData.yoe}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Role</th>
+                <th>{{workData.role}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Salary</th>
+                <th>{{workData.salary}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Start Date</th>
+                <th>{{workData.start}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Address 1</th>
+                <th>{{workData.address1}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Address 2</th>
+                <th>{{workData.address2}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Country</th>
+                <th>{{workData.country}}</th>
+            </tr>
+            <tr>
+                <th scope="row">State</th>
+                <th>{{workData.state}}</th>
+            </tr>
+            <tr>
+                <th scope="row">District</th>
+                <th>{{workData.district}}</th>
+            </tr>
+            <tr>
+                <th scope="row">City</th>
+                <th>{{workData.city}}</th>
+            </tr>
+            <tr>
+                <th scope="row">Zip</th>
+                <th>{{workData.zipCode}}</th>
+            </tr>
+        </tbody>
+    </table>    
+</div>
